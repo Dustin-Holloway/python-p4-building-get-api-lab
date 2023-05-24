@@ -33,6 +33,10 @@ class Bakery(db.Model, SerializerMixin):
     def __repr__(self):
         return f"<Bakery {self.name}"
 
+    def delete(self):
+        db.session.delete(self)
+        db.session.commit()
+
     serialize_rules = "-bakery.baked_goods"
 
 
@@ -61,3 +65,7 @@ class BakedGood(db.Model, SerializerMixin):
         return f"<BakedGood {self.name}, {self.price}>"
 
     serialize_rules = "-baked_goods.bakery"
+
+    def delete(self):
+        db.session.delete(self)
+        db.session.commit()
